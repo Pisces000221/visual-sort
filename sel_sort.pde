@@ -1,4 +1,4 @@
-int size = 20;
+int arrSize = 20;
 int barWidth = 40, barPadding = 10, partPadding = 40;
 int maxElm = 100;
 float heightFactor = 4;
@@ -10,14 +10,14 @@ class Element {
   float x, y;
   color colour;
 }
-Element[] elm = new Element[size];
+Element[] elm = new Element[arrSize];
 float maxY = maxElm * heightFactor + barPadding;
 color sortedColour = color(192, 192, 144), unsortedColour = color(144, 192, 255),
       scannerColour = color(48, 255, 48), unsortedMinColour = color(255, 64, 64);
 
 // The order part
-int[] unsorted = new int[size];
-int unsortedCount = size;
+int[] unsorted = new int[arrSize];
+int unsortedCount = arrSize;
 int unsortedItr, unsortedMinIdx;
 
 // The animation part
@@ -28,14 +28,14 @@ class MoveAction {
   int totTime, elapsedTime;
   float step(int dt) { return (float)(this.elapsedTime += dt) / (float)this.totTime; }
 }
-MoveAction[] mvact = new MoveAction[size];
+MoveAction[] mvact = new MoveAction[arrSize];
 class TintAction {
   boolean isRunning;
   float r1, g1, b1, r2, g2, b2;
   int totTime, elapsedTime;
   float step(int dt) { return (float)(this.elapsedTime += dt) / (float)this.totTime; }
 }
-TintAction[] tnact = new TintAction[size];
+TintAction[] tnact = new TintAction[arrSize];
 void activateMove(int idx, float x2, float y2, int dur)
 {
   mvact[idx].isRunning = true;
@@ -58,10 +58,10 @@ void activateTint(int idx, color c2, int dur)
 
 void setup() {
   size(
-    barWidth * size + barPadding * (size + 1) + partPadding,
+    barWidth * arrSize + barPadding * (arrSize + 1) + partPadding,
     int(maxElm * heightFactor) + barPadding * 2);
   noStroke();
-  for (int i = 0; i < size; ++i) {
+  for (int i = 0; i < arrSize; ++i) {
     elm[i] = new Element();
     elm[i].value = int(random(maxElm) + 1);
     elm[i].colour = unsortedColour;
@@ -89,7 +89,7 @@ void draw() {
   } 
   lastMillis = curMillis;
 
-  for (int i = 0; i < size; ++i) {
+  for (int i = 0; i < arrSize; ++i) {
     fill(elm[i].colour);
     rect(elm[i].x, elm[i].y, barWidth, elm[i].value * heightFactor);
   }
@@ -101,7 +101,7 @@ float weighted_sine(float a, float b, float w) { return a * (1 - sin(w * HALF_PI
 void anim_update(int dt) {
   float progress;
   int r, g, b;
-  for (int i = 0; i < size; ++i) {
+  for (int i = 0; i < arrSize; ++i) {
     if (mvact[i].isRunning) {
       progress = mvact[i].step(dt);
       if (progress >= 1) {
