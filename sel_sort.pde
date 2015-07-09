@@ -3,7 +3,7 @@ int barWidth = 40, barPadding = 10, partPadding = 40;
 int maxElm = 100;
 float heightFactor = 4;
 int sortedCount = 0;
-int opInterval = 500, actionDur = 300;
+int opInterval = 300, actionDur = 180;
 
 class Element {
   int value;
