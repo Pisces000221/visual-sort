@@ -70,7 +70,6 @@ void setup() {
     unsorted[i] = i;
     mvact[i] = new MoveAction();
     tnact[i] = new TintAction();
-    println(i, elm[i].value);
   }
   lastMillis = lastOpMillis = millis();
   unsortedItr = 1;
